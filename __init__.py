@@ -52,11 +52,11 @@ class VixUiRangeFloat:
 
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/UI"
-    RETURN_TYPES = ("FLOAT", )
+    RETURN_TYPES = ("FLOAT",)
 
     @classmethod
     def do_it(cls, value, **kwargs) -> tuple:
-        return (value, )
+        return (value,)
 
 
 class VixUiRangeScaleFloat:
@@ -78,11 +78,11 @@ class VixUiRangeScaleFloat:
 
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/UI"
-    RETURN_TYPES = ("FLOAT", )
+    RETURN_TYPES = ("FLOAT",)
 
     @classmethod
     def do_it(cls, value, **kwargs) -> tuple:
-        return (value, )
+        return (value,)
 
 
 class VixUiList:
@@ -107,8 +107,8 @@ class VixUiList:
     def do_it(cls, default_value, **kwargs) -> tuple:
         possible_values = json.loads(kwargs["possible_values"])
         if isinstance(possible_values, dict) and default_value in possible_values:
-            return (possible_values[default_value], )
-        return (default_value, )
+            return (possible_values[default_value],)
+        return (default_value,)
 
 
 class VixUiPrompt:
@@ -130,7 +130,7 @@ class VixUiPrompt:
 
     @classmethod
     def do_it(cls, text, **kwargs) -> tuple:
-        return (text, )
+        return (text,)
 
 
 class VixUiCheckboxLogic:
@@ -163,6 +163,53 @@ class VixUiCheckboxLogic:
         return (kwargs["input_on_state"],)
 
 
+class VixUiListLogic:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "default_value": ("STRING", {}),
+                "possible_values": ("STRING", {"default": "[]", "multiline": True}),
+                "display_name": ("STRING", {"default": "Display Name"}),
+                "optional": ("BOOLEAN", {"default": True}),
+                "advanced": ("BOOLEAN", {"default": True}),
+                "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
+            },
+            "optional": {
+                "input_first": (any_typ,),
+                "input_second": (any_typ,),
+                "input_third": (any_typ,),
+                "input_fourth": (any_typ,),
+                "input_fifth": (any_typ,),
+                "input_sixth": (any_typ,),
+            },
+        }
+
+    RETURN_TYPES = (any_typ,)
+    RETURN_NAMES = ("output_to",)
+    CATEGORY = "Visionatrix/UI"
+    FUNCTION = "do_it"
+
+    @classmethod
+    def do_it(cls, default_value, **kwargs) -> tuple:
+        list_with_values: list = json.loads(kwargs["possible_values"])
+        index_to_return = list_with_values.index(default_value)
+        if index_to_return == 0:
+            return (kwargs["input_first"],)
+        if index_to_return == 1:
+            return (kwargs["input_second"],)
+        if index_to_return == 2:
+            return (kwargs["input_third"],)
+        if index_to_return == 3:
+            return (kwargs["input_fourth"],)
+        if index_to_return == 4:
+            return (kwargs["input_fifth"],)
+        if index_to_return == 5:
+            return (kwargs["input_sixth"],)
+        raise RuntimeError("Workflow logic error")
+
+
 class VixUiWorkflowMetadata:
     @classmethod
     def INPUT_TYPES(cls):
@@ -185,7 +232,7 @@ class VixUiWorkflowMetadata:
 
     @classmethod
     def do_it(cls, text, **kwargs) -> tuple:
-        return (text, )
+        return (text,)
 
 
 NODE_CLASS_MAPPINGS = {
@@ -195,6 +242,7 @@ NODE_CLASS_MAPPINGS = {
     "VixUiList": VixUiList,
     "VixUiPrompt": VixUiPrompt,
     "VixUiCheckboxLogic": VixUiCheckboxLogic,
+    "VixUiListLogic": VixUiListLogic,
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
 }
 
@@ -205,5 +253,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiList": "VixUI-List",
     "VixUiPrompt": "VixUI-Prompt",
     "VixUiCheckboxLogic": "VixUI-CheckboxLogic",
+    "VixUiListLogic": "VixUI-ListLogic",
     "VixUiWorkflowMetadata": "VixUI-WorkflowMetadata",
 }
