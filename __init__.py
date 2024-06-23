@@ -1,3 +1,6 @@
+import json
+
+
 class AnyType(str):
     def __ne__(self, __value: object) -> bool:
         return False
@@ -16,23 +19,18 @@ class VixUiCheckbox:
                 "optional": ("BOOLEAN", {"default": True}),
                 "advanced": ("BOOLEAN", {"default": True}),
                 "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
             },
-            "optional": {
-                "input_off_state": (any_typ,),
-                "input_on_state": (any_typ,),
-            }
         }
 
-    RETURN_TYPES = (any_typ,)
-    RETURN_NAMES = ("output_to",)
+    RETURN_TYPES = ("BOOLEAN", "INT")
+    RETURN_NAMES = ("bool", "int")
     CATEGORY = "Visionatrix/UI"
     FUNCTION = "do_it"
 
     @classmethod
-    def do_it(cls, state, **kwargs):
-        if state is False:
-            return (kwargs["input_off_state"],)
-        return (kwargs["input_on_state"],)
+    def do_it(cls, state, **kwargs) -> tuple:
+        return state, int(state)
 
 
 class VixUiRangeFloat:
@@ -48,6 +46,7 @@ class VixUiRangeFloat:
                 "max": ("FLOAT", {"default": 9.0}),
                 "step": ("FLOAT", {"default": 0.1}),
                 "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
             },
         }
 
@@ -56,7 +55,33 @@ class VixUiRangeFloat:
     RETURN_TYPES = ("FLOAT", )
 
     @classmethod
-    def do_it(cls, value, **kwargs):
+    def do_it(cls, value, **kwargs) -> tuple:
+        return (value, )
+
+
+class VixUiRangeScaleFloat:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "value": ("FLOAT", {"default": 4.0}),
+                "display_name": ("STRING", {"default": "Image Size Factor"}),
+                "optional": ("BOOLEAN", {"default": True}),
+                "advanced": ("BOOLEAN", {"default": True}),
+                "min": ("FLOAT", {"default": 1.0}),
+                "max": ("FLOAT", {"default": 9.0}),
+                "step": ("FLOAT", {"default": 0.1}),
+                "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
+            },
+        }
+
+    FUNCTION = "do_it"
+    CATEGORY = "Visionatrix/UI"
+    RETURN_TYPES = ("FLOAT", )
+
+    @classmethod
+    def do_it(cls, value, **kwargs) -> tuple:
         return (value, )
 
 
@@ -71,14 +96,18 @@ class VixUiList:
                 "optional": ("BOOLEAN", {"default": True}),
                 "advanced": ("BOOLEAN", {"default": True}),
                 "order": ("INT", {"default": 99}),
-            }
+                "custom_id": ("STRING", {"default": ""}),
+            },
         }
-    RETURN_TYPES = ("STRING",)
+    RETURN_TYPES = (any_typ,)
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/UI"
 
     @classmethod
-    def do_it(cls, default_value, **kwargs):
+    def do_it(cls, default_value, **kwargs) -> tuple:
+        possible_values = json.loads(kwargs["possible_values"])
+        if isinstance(possible_values, dict) and default_value in possible_values:
+            return (possible_values[default_value], )
         return (default_value, )
 
 
@@ -92,15 +121,46 @@ class VixUiPrompt:
                 "optional": ("BOOLEAN", {"default": False}),
                 "advanced": ("BOOLEAN", {"default": False}),
                 "order": ("INT", {"default": 10}),
-            }
+                "custom_id": ("STRING", {"default": ""}),
+            },
         }
     RETURN_TYPES = ("STRING",)
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/UI"
 
     @classmethod
-    def do_it(cls, text, **kwargs):
+    def do_it(cls, text, **kwargs) -> tuple:
         return (text, )
+
+
+class VixUiCheckboxLogic:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "state": ("BOOLEAN", {"default": False}),
+                "display_name": ("STRING", {"default": "Display Name"}),
+                "optional": ("BOOLEAN", {"default": True}),
+                "advanced": ("BOOLEAN", {"default": True}),
+                "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
+            },
+            "optional": {
+                "input_off_state": (any_typ,),
+                "input_on_state": (any_typ,),
+            },
+        }
+
+    RETURN_TYPES = (any_typ,)
+    RETURN_NAMES = ("output_to",)
+    CATEGORY = "Visionatrix/UI"
+    FUNCTION = "do_it"
+
+    @classmethod
+    def do_it(cls, state, **kwargs) -> tuple:
+        if state is False:
+            return (kwargs["input_off_state"],)
+        return (kwargs["input_on_state"],)
 
 
 class VixUiWorkflowMetadata:
@@ -116,6 +176,7 @@ class VixUiWorkflowMetadata:
                 "documentation": ("STRING", {"default": ""}),
                 "license": ("STRING", {"default": ""}),
                 "tags": ("STRING", {"default": "[\"general\"]", "multiline": True}),
+                "version": ("STRING", {"default": "1.0.0"})
             }
         }
     RETURN_TYPES = ("STRING",)
@@ -123,22 +184,26 @@ class VixUiWorkflowMetadata:
     CATEGORY = "Visionatrix/UI"
 
     @classmethod
-    def do_it(cls, text, **kwargs):
+    def do_it(cls, text, **kwargs) -> tuple:
         return (text, )
 
 
 NODE_CLASS_MAPPINGS = {
     "VixUiCheckbox": VixUiCheckbox,
     "VixUiRangeFloat": VixUiRangeFloat,
+    "VixUiRangeScaleFloat": VixUiRangeScaleFloat,
     "VixUiList": VixUiList,
     "VixUiPrompt": VixUiPrompt,
+    "VixUiCheckboxLogic": VixUiCheckboxLogic,
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiCheckbox": "VixUI-Checkbox",
     "VixUiRangeFloat": "VixUI-RangeFloat",
+    "VixUiRangeScaleFloat": "VixUI-RangeScaleFloat",
     "VixUiList": "VixUI-List",
     "VixUiPrompt": "VixUI-Prompt",
+    "VixUiCheckboxLogic": "VixUI-CheckboxLogic",
     "VixUiWorkflowMetadata": "VixUI-WorkflowMetadata",
 }
