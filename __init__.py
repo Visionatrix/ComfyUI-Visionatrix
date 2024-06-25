@@ -159,8 +159,8 @@ class VixUiCheckboxLogic:
     @classmethod
     def do_it(cls, state, **kwargs) -> tuple:
         if state is False:
-            return (kwargs["input_off_state"],)
-        return (kwargs["input_on_state"],)
+            return (kwargs.get("input_off_state", None),)
+        return (kwargs.get("input_on_state", None),)
 
 
 class VixUiListLogic:
