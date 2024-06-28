@@ -1,6 +1,6 @@
 # ComfyUI-Visionatrix
 
-The ComfyUI-Visionatrix nodes are required for convenient ComfyUI to [Visionatrix](https://github.com/Visionatrix/Visionatrix) workflow support migration, in particular to extract prompt input params (input, textarea, checkbox, select, range, file) to be used in simplified Visionatrix UI.
+The ComfyUI-Visionatrix nodes are designed for convenient ComfyUI to [Visionatrix](https://github.com/Visionatrix/Visionatrix) workflow support migration, in particular to extract prompt input params (input, textarea, checkbox, select, range, file) to be used in simplified Visionatrix UI.
 
 Short migration steps guide in [Visionatrix docs](https://visionatrix.github.io/VixFlowsDocs/).
 
