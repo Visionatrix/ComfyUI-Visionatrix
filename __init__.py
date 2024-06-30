@@ -68,6 +68,7 @@ class VixUiRangeScaleFloat:
                 "display_name": ("STRING", {"default": "Image Size Factor"}),
                 "optional": ("BOOLEAN", {"default": True}),
                 "advanced": ("BOOLEAN", {"default": True}),
+                "source_input_name": ("STRING", {"default": ""}),
                 "min": ("FLOAT", {"default": 1.0}),
                 "max": ("FLOAT", {"default": 9.0}),
                 "step": ("FLOAT", {"default": 0.1}),
