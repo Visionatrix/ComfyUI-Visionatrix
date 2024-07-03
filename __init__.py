@@ -225,6 +225,9 @@ class VixUiWorkflowMetadata:
                 "license": ("STRING", {"default": ""}),
                 "tags": ("STRING", {"default": "[\"general\"]", "multiline": True}),
                 "version": ("STRING", {"default": "1.0.0"})
+            },
+            "optional": {
+                "requires": ("STRING", {"default": "[]", "multiline": True}),
             }
         }
     RETURN_TYPES = ("STRING",)
