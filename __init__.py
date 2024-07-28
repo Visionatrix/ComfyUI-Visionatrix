@@ -86,6 +86,32 @@ class VixUiRangeScaleFloat:
         return (value,)
 
 
+class VixUiRangeInt:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "value": ("INT", {"default": 10}),
+                "display_name": ("STRING", {"default": "Display Range"}),
+                "optional": ("BOOLEAN", {"default": True}),
+                "advanced": ("BOOLEAN", {"default": True}),
+                "min": ("INT", {"default": 1}),
+                "max": ("INT", {"default": 20}),
+                "step": ("INT", {"default": 1}),
+                "order": ("INT", {"default": 99}),
+                "custom_id": ("STRING", {"default": ""}),
+            },
+        }
+
+    FUNCTION = "do_it"
+    CATEGORY = "Visionatrix/UI"
+    RETURN_TYPES = ("INT",)
+
+    @classmethod
+    def do_it(cls, value, **kwargs) -> tuple:
+        return (value,)
+
+
 class VixUiList:
     @classmethod
     def INPUT_TYPES(cls):
@@ -243,6 +269,7 @@ NODE_CLASS_MAPPINGS = {
     "VixUiCheckbox": VixUiCheckbox,
     "VixUiRangeFloat": VixUiRangeFloat,
     "VixUiRangeScaleFloat": VixUiRangeScaleFloat,
+    "VixUiRangeInt": VixUiRangeInt,
     "VixUiList": VixUiList,
     "VixUiPrompt": VixUiPrompt,
     "VixUiCheckboxLogic": VixUiCheckboxLogic,
@@ -254,6 +281,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiCheckbox": "VixUI-Checkbox",
     "VixUiRangeFloat": "VixUI-RangeFloat",
     "VixUiRangeScaleFloat": "VixUI-RangeScaleFloat",
+    "VixUiRangeInt": "VixUI-RangeInt",
     "VixUiList": "VixUI-List",
     "VixUiPrompt": "VixUI-Prompt",
     "VixUiCheckboxLogic": "VixUI-CheckboxLogic",

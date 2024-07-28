@@ -11,6 +11,7 @@ Current `Visionatrix/UI` nodes list:
 - **VixUI-Checkbox** - simple checkbox boolean input field;
 - **VixUi-RangeFloat** - range float number input, e.g. for prompt strength selection;
 - **VixUi-RangeScaleFloat** - special range float number input, to define the scale factor of the input image (e.g. for upscale)
+- **VixUi-RangeInt** - range int number input, e.g. for number of steps selection;
 - **VixUi-List** - define list of options to be displayed in Visionatrix UI;
 - **VixUI-Prompt** - to define a textarea input in Visionatrix UI and pass it to your CLIPTextEncode node with prompt;
 - **VixUi-CheckboxLogic** - to define the boolean logical switch (checkbox), e.g. two modes and paths of workflow execution;
