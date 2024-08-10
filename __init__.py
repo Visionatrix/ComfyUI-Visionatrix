@@ -254,6 +254,8 @@ class VixUiWorkflowMetadata:
             },
             "optional": {
                 "requires": ("STRING", {"default": "[]", "multiline": True}),
+                "is_seed_supported": ("BOOLEAN", {"default": True}),
+                "is_count_supported": ("BOOLEAN", {"default": True}),
             }
         }
     RETURN_TYPES = ("STRING",)
