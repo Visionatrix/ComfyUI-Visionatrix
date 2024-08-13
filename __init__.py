@@ -21,6 +21,9 @@ class VixUiCheckbox:
                 "order": ("INT", {"default": 99}),
                 "custom_id": ("STRING", {"default": ""}),
             },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
+            },
         }
 
     RETURN_TYPES = ("BOOLEAN", "INT")
@@ -47,6 +50,9 @@ class VixUiRangeFloat:
                 "step": ("FLOAT", {"default": 0.1}),
                 "order": ("INT", {"default": 99}),
                 "custom_id": ("STRING", {"default": ""}),
+            },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -75,6 +81,9 @@ class VixUiRangeScaleFloat:
                 "order": ("INT", {"default": 99}),
                 "custom_id": ("STRING", {"default": ""}),
             },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
+            },
         }
 
     FUNCTION = "do_it"
@@ -101,6 +110,9 @@ class VixUiRangeInt:
                 "order": ("INT", {"default": 99}),
                 "custom_id": ("STRING", {"default": ""}),
             },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
+            },
         }
 
     FUNCTION = "do_it"
@@ -124,6 +136,9 @@ class VixUiList:
                 "advanced": ("BOOLEAN", {"default": True}),
                 "order": ("INT", {"default": 99}),
                 "custom_id": ("STRING", {"default": ""}),
+            },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
             },
         }
     RETURN_TYPES = (any_typ,)
@@ -150,6 +165,9 @@ class VixUiPrompt:
                 "order": ("INT", {"default": 10}),
                 "custom_id": ("STRING", {"default": ""}),
             },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
+            },
         }
     RETURN_TYPES = ("STRING",)
     FUNCTION = "do_it"
@@ -175,6 +193,7 @@ class VixUiCheckboxLogic:
             "optional": {
                 "input_off_state": (any_typ,),
                 "input_on_state": (any_typ,),
+                "hidden": ("BOOLEAN", {"default": False}),
             },
         }
 
@@ -210,6 +229,7 @@ class VixUiListLogic:
                 "input_fourth": (any_typ,),
                 "input_fifth": (any_typ,),
                 "input_sixth": (any_typ,),
+                "hidden": ("BOOLEAN", {"default": False}),
             },
         }
 
