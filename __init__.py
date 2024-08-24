@@ -191,8 +191,8 @@ class VixUiCheckboxLogic:
                 "custom_id": ("STRING", {"default": ""}),
             },
             "optional": {
-                "input_off_state": (any_typ,),
-                "input_on_state": (any_typ,),
+                "input_off_state": (any_typ, {"lazy": True}),
+                "input_on_state": (any_typ, {"lazy": True}),
                 "hidden": ("BOOLEAN", {"default": False}),
             },
         }
@@ -207,6 +207,12 @@ class VixUiCheckboxLogic:
         if state is False:
             return (kwargs.get("input_off_state", None),)
         return (kwargs.get("input_on_state", None),)
+
+    @staticmethod
+    def check_lazy_status(state, **kwargs):
+        if state is False:
+            return ["input_off_state"]
+        return ["input_on_state"]
 
 
 class VixUiListLogic:
@@ -223,12 +229,12 @@ class VixUiListLogic:
                 "custom_id": ("STRING", {"default": ""}),
             },
             "optional": {
-                "input_first": (any_typ,),
-                "input_second": (any_typ,),
-                "input_third": (any_typ,),
-                "input_fourth": (any_typ,),
-                "input_fifth": (any_typ,),
-                "input_sixth": (any_typ,),
+                "input_first": (any_typ, {"lazy": True}),
+                "input_second": (any_typ, {"lazy": True}),
+                "input_third": (any_typ, {"lazy": True}),
+                "input_fourth": (any_typ, {"lazy": True}),
+                "input_fifth": (any_typ, {"lazy": True}),
+                "input_sixth": (any_typ, {"lazy": True}),
                 "hidden": ("BOOLEAN", {"default": False}),
             },
         }
@@ -254,6 +260,24 @@ class VixUiListLogic:
             return (kwargs["input_fifth"],)
         if index_to_return == 5:
             return (kwargs["input_sixth"],)
+        raise RuntimeError("Workflow logic error")
+
+    @staticmethod
+    def check_lazy_status(default_value, **kwargs):
+        list_with_values: list = json.loads(kwargs["possible_values"])
+        index_to_return = list_with_values.index(default_value)
+        if index_to_return == 0:
+            return ["input_first"]
+        if index_to_return == 1:
+            return ["input_second"]
+        if index_to_return == 2:
+            return ["input_third"]
+        if index_to_return == 3:
+            return ["input_fourth"]
+        if index_to_return == 4:
+            return ["input_fifth"]
+        if index_to_return == 5:
+            return ["input_sixth"]
         raise RuntimeError("Workflow logic error")
 
 
