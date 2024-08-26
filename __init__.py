@@ -41,7 +41,7 @@ class VixUiRangeFloat:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "value": ("FLOAT", {"default": 4.0, "round": False}),
+                "value": ("FLOAT", {"default": 4.0, "step": 0.01, "round": False}),
                 "display_name": ("STRING", {"default": "Display Range"}),
                 "optional": ("BOOLEAN", {"default": True}),
                 "advanced": ("BOOLEAN", {"default": True}),
@@ -70,7 +70,7 @@ class VixUiRangeScaleFloat:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "value": ("FLOAT", {"default": 4.0, "round": False}),
+                "value": ("FLOAT", {"default": 4.0, "step": 0.01, "round": False}),
                 "display_name": ("STRING", {"default": "Image Size Factor"}),
                 "optional": ("BOOLEAN", {"default": True}),
                 "advanced": ("BOOLEAN", {"default": True}),
