@@ -302,6 +302,7 @@ class VixUiWorkflowMetadata:
                 "is_seed_supported": ("BOOLEAN", {"default": True}),
                 "is_count_supported": ("BOOLEAN", {"default": True}),
                 "is_translations_supported": ("BOOLEAN", {"default": False}),
+                "macos_supported": ("BOOLEAN", {"default": False}),
             }
         }
     RETURN_TYPES = ("STRING",)
