@@ -303,6 +303,7 @@ class VixUiWorkflowMetadata:
                 "is_count_supported": ("BOOLEAN", {"default": True}),
                 "is_translations_supported": ("BOOLEAN", {"default": False}),
                 "is_macos_supported": ("BOOLEAN", {"default": True}),
+                "required_memory_gb": ("FLOAT", {"default": 0.0, "step": 0.1, "round": False}),
             }
         }
     RETURN_TYPES = ("STRING",)
