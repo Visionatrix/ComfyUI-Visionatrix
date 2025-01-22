@@ -315,6 +315,29 @@ class VixUiWorkflowMetadata:
         return (text,)
 
 
+class VixDynamicLoraDefinition:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "model": ("MODEL", {"tooltip": "The diffusion model the LoRA will be applied to."}),
+                "clip": ("CLIP", {"tooltip": "The CLIP model the LoRA will be applied to."}),
+                "base_model_type": ("STRING", {"tooltip": "The base type of model in CivitAI format."}),
+                "description": ("STRING", {"tooltip": "Brief explanation of LoRA functionality at the added place."}),
+            },
+        }
+
+    RETURN_TYPES = ("MODEL", "CLIP")
+    OUTPUT_TOOLTIPS = ("The modified diffusion model.", "The modified CLIP model.")
+    CATEGORY = "Visionatrix/UI"
+    FUNCTION = "do_it"
+    DESCRIPTION = "Node that allows dynamic selection of any supported LoRAs from CivitAI in the Visionatrix UI."
+
+    @classmethod
+    def do_it(cls, model, clip) -> tuple:
+        return model, clip
+
+
 NODE_CLASS_MAPPINGS = {
     "VixUiCheckbox": VixUiCheckbox,
     "VixUiRangeFloat": VixUiRangeFloat,
@@ -325,6 +348,7 @@ NODE_CLASS_MAPPINGS = {
     "VixUiCheckboxLogic": VixUiCheckboxLogic,
     "VixUiListLogic": VixUiListLogic,
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
+    "VixDynamicLoraDefinition": VixDynamicLoraDefinition,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -337,4 +361,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiCheckboxLogic": "VixUI-CheckboxLogic",
     "VixUiListLogic": "VixUI-ListLogic",
     "VixUiWorkflowMetadata": "VixUI-WorkflowMetadata",
+    "VixDynamicLoraDefinition": "VixUI-VixDynamicLoraDefinition",
 }
