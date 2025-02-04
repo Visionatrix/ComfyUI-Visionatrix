@@ -334,7 +334,7 @@ class VixDynamicLoraDefinition:
     DESCRIPTION = "Node that allows dynamic selection of any supported LoRAs from CivitAI in the Visionatrix UI."
 
     @classmethod
-    def do_it(cls, model, clip) -> tuple:
+    def do_it(cls, model, clip, **kwargs) -> tuple:
         return model, clip
 
 
