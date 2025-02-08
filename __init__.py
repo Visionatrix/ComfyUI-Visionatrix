@@ -339,6 +339,36 @@ class VixDynamicLoraDefinition:
         return model, clip
 
 
+class VixCheckboxLogic:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "state": ("BOOLEAN", {"default": False}),
+                "input_off_state": (any_typ, {"lazy": True}),
+                "input_on_state": (any_typ, {"lazy": True}),
+            },
+            "optional": {},
+        }
+
+    RETURN_TYPES = (any_typ,)
+    RETURN_NAMES = ("output_to",)
+    CATEGORY = "Visionatrix/Logic"
+    FUNCTION = "do_it"
+
+    @classmethod
+    def do_it(cls, state, **kwargs) -> tuple:
+        if state is False:
+            return (kwargs.get("input_off_state", None),)
+        return (kwargs.get("input_on_state", None),)
+
+    @staticmethod
+    def check_lazy_status(state, **kwargs):
+        if state is False:
+            return ["input_off_state"]
+        return ["input_on_state"]
+
+
 NODE_CLASS_MAPPINGS = {
     "VixUiCheckbox": VixUiCheckbox,
     "VixUiRangeFloat": VixUiRangeFloat,
@@ -350,6 +380,7 @@ NODE_CLASS_MAPPINGS = {
     "VixUiListLogic": VixUiListLogic,
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
     "VixDynamicLoraDefinition": VixDynamicLoraDefinition,
+    "VixCheckboxLogic": VixCheckboxLogic,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -362,5 +393,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiCheckboxLogic": "VixUI-CheckboxLogic",
     "VixUiListLogic": "VixUI-ListLogic",
     "VixUiWorkflowMetadata": "VixUI-WorkflowMetadata",
-    "VixDynamicLoraDefinition": "VixUI-VixDynamicLoraDefinition",
+    "VixDynamicLoraDefinition": "Vix-DynamicLoraDefinition",
+    "VixCheckboxLogic": "Vix-CheckboxLogic",
 }

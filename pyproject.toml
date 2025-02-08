@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-visionatrix"
 description = "The ComfyUI-Visionatrix nodes are designed for convenient ComfyUI to [a/Visionatrix](https://github.com/Visionatrix/Visionatrix) workflow support migration, in particular to extract prompt input params (input, textarea, checkbox, select, range, file) to be used in simplified Visionatrix UI."
-version = "1.0.4"
+version = "1.0.5"
 license = {file = "LICENSE"}
 urls.Repository = "https://github.com/Visionatrix/ComfyUI-Visionatrix"
 
