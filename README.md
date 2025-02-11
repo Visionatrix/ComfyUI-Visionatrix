@@ -17,3 +17,4 @@ Current `Visionatrix/UI` nodes list:
 - **VixUi-CheckboxLogic** - to define the boolean logical switch (checkbox), e.g. two modes and paths of workflow execution;
 - **VixUi-ListLogic** - to define the list of available mode options similar to `VixUi-CheckboxLogic` (up to 6 input options);
 - **VixUi-WorkflowMetadata** - mandatory node to fill the workflow metadata required for each Visionatrix flow for displaying in the UI list of workflows;
+- **VixUiAspectRatioSelector** - use it to display the desired image aspect ratio for your Flow.

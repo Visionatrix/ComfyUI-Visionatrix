@@ -9,6 +9,51 @@ class AnyType(str):
 any_typ = AnyType("*")
 
 
+class VixUiAspectRatioSelector:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "aspect_ratio": (
+                    [
+                        "1:1 (1024x1024)",
+                        "2:3 (832x1216)",
+                        "3:4 (896x1152)",
+                        "5:8 (768x1216)",
+                        "9:16 (768x1344)",
+                        "9:19 (704x1472)",
+                        "9:21 (640x1536)",
+                        "3:2 (1216x832)",
+                        "4:3 (1152x896)",
+                        "8:5 (1216x768)",
+                        "16:9 (1344x768)",
+                        "19:9 (1472x704)",
+                        "21:9 (1536x640)",
+                    ],
+                ),
+                "display_name": ("STRING", {"default": "Aspect Ratio"}),
+                "optional": ("BOOLEAN", {"default": True}),
+                "advanced": ("BOOLEAN", {"default": True}),
+                "order": ("INT", {"default": 20}),
+                "custom_id": ("STRING", {"default": "aspect_ratio"}),
+            },
+            "optional": {
+                "hidden": ("BOOLEAN", {"default": False}),
+            },
+        }
+
+    RETURN_TYPES = ("STRING", "INT", "INT")
+    RETURN_NAMES = ("ratio", "width", "height")
+    FUNCTION = "do_it"
+    CATEGORY = "Visionatrix/UI"
+
+    def do_it(self, aspect_ratio, **kwargs):
+        ratio, dims = aspect_ratio.split(" (")
+        dims = dims[:-1]  # Remove the closing parenthesis
+        width, height = map(int, dims.split("x"))
+        return ratio, width, height
+
+
 class VixUiCheckbox:
     @classmethod
     def INPUT_TYPES(cls):
@@ -370,6 +415,7 @@ class VixCheckboxLogic:
 
 
 NODE_CLASS_MAPPINGS = {
+    "VixUiAspectRatioSelector": VixUiAspectRatioSelector,
     "VixUiCheckbox": VixUiCheckbox,
     "VixUiRangeFloat": VixUiRangeFloat,
     "VixUiRangeScaleFloat": VixUiRangeScaleFloat,
@@ -381,9 +427,11 @@ NODE_CLASS_MAPPINGS = {
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
     "VixDynamicLoraDefinition": VixDynamicLoraDefinition,
     "VixCheckboxLogic": VixCheckboxLogic,
+
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
+    "VixUiAspectRatioSelector": "VixUI-Aspect Ratio",
     "VixUiCheckbox": "VixUI-Checkbox",
     "VixUiRangeFloat": "VixUI-RangeFloat",
     "VixUiRangeScaleFloat": "VixUI-RangeScaleFloat",
