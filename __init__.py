@@ -1,5 +1,7 @@
 import json
 
+from .style_aligned import StyleAlignedBatchAlign
+
 
 class AnyType(str):
     def __ne__(self, __value: object) -> bool:
@@ -427,7 +429,7 @@ NODE_CLASS_MAPPINGS = {
     "VixUiWorkflowMetadata": VixUiWorkflowMetadata,
     "VixDynamicLoraDefinition": VixDynamicLoraDefinition,
     "VixCheckboxLogic": VixCheckboxLogic,
-
+    "StyleAlignedBatchAlign": StyleAlignedBatchAlign,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -443,4 +445,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixUiWorkflowMetadata": "VixUI-WorkflowMetadata",
     "VixDynamicLoraDefinition": "Vix-DynamicLoraDefinition",
     "VixCheckboxLogic": "Vix-CheckboxLogic",
+    "StyleAlignedBatchAlign": "StyleAligned Batch Align",
 }
