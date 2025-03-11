@@ -352,6 +352,7 @@ class VixUiWorkflowMetadata:
                 "is_macos_supported": ("BOOLEAN", {"default": True}),
                 "required_memory_gb": ("FLOAT", {"default": 0.0, "step": 0.1, "round": False}),
                 "hidden": ("BOOLEAN", {"default": False}),
+                "remote_vae": ("BOOLEAN", {"default": False}),
             }
         }
     RETURN_TYPES = ("STRING",)
