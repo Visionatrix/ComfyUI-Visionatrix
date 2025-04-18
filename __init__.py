@@ -417,6 +417,57 @@ class VixCheckboxLogic:
         return ["input_on_state"]
 
 
+class VixMultilineText:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "text": ("STRING", {"default": "", "multiline": True, "dynamicPrompts": False}),
+            },
+            "optional": {},
+        }
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "do_it"
+    CATEGORY = "Visionatrix/Text"
+
+    @classmethod
+    def do_it(cls, text, **kwargs) -> tuple:
+        return (text,)
+
+
+class VixTextConcatenate:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "delimiter": ("STRING", {"default": ", "}),
+                "clean_whitespace": (["true", "false"],),
+            },
+            "optional": {
+                "text_a": ("STRING", {"forceInput": True}),
+                "text_b": ("STRING", {"forceInput": True}),
+                "text_c": ("STRING", {"forceInput": True}),
+                "text_d": ("STRING", {"forceInput": True}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "do_it"
+    CATEGORY = "Visionatrix/Text"
+
+    @classmethod
+    def do_it(cls, delimiter: str, clean_whitespace: str, **kwargs):
+        delim = "\n" if delimiter == "\\n" else delimiter
+        strip = clean_whitespace.lower() == "true"
+        parts = (
+            (val.strip() if strip else val)
+            for _, val in sorted(kwargs.items())
+            if isinstance(val, str)
+        )
+        return (delim.join(filter(None, parts)),)
+
+
+
 NODE_CLASS_MAPPINGS = {
     "VixUiAspectRatioSelector": VixUiAspectRatioSelector,
     "VixUiCheckbox": VixUiCheckbox,
@@ -431,6 +482,8 @@ NODE_CLASS_MAPPINGS = {
     "VixDynamicLoraDefinition": VixDynamicLoraDefinition,
     "VixCheckboxLogic": VixCheckboxLogic,
     "StyleAlignedBatchAlign": StyleAlignedBatchAlign,
+    "VixMultilineText": VixMultilineText,
+    "VixTextConcatenate": VixTextConcatenate,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
@@ -447,4 +500,6 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixDynamicLoraDefinition": "Vix-DynamicLoraDefinition",
     "VixCheckboxLogic": "Vix-CheckboxLogic",
     "StyleAlignedBatchAlign": "StyleAligned Batch Align",
+    "VixMultilineText": "Text Multiline",
+    "VixTextConcatenate": "Text Concatenate",
 }

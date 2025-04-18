@@ -19,6 +19,11 @@ Current `Visionatrix/UI` nodes list:
 - **VixUi-WorkflowMetadata** - mandatory node to fill the workflow metadata required for each Visionatrix flow for displaying in the UI list of workflows;
 - **VixUiAspectRatioSelector** - use it to display the desired image aspect ratio for your Flow.
 
+Current `Visionatrix/Text` nodes list:
+
+- **VixMultilineText** - node to just hold text(code compatible).
+- **VixTextConcatenate** - node to concatenate up to 4 different strings with optional delimiter.
+
 ### Incorporated nodes
 
 - **StyleAlignedBatchAlign** - from the `style_aligned_comfy` repository
