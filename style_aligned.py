@@ -3,11 +3,9 @@
 # Copyright (c) 2023 Brian Fitzgerald
 # original repository: https://github.com/brianfitzgerald/style_aligned_comfy
 
-import torch.nn as nn
 import torch
-
+import torch.nn as nn
 from comfy.model_patcher import ModelPatcher
-
 
 T = torch.Tensor
 
@@ -54,8 +52,7 @@ def adain(feat: T) -> T:
     feat_style_mean = expand_first(feat_mean)
     feat_style_std = expand_first(feat_std)
     feat = (feat - feat_mean) / feat_std
-    feat = feat * feat_style_std + feat_style_mean
-    return feat
+    return feat * feat_style_std + feat_style_mean
 
 
 class SharedAttentionProcessor:
@@ -89,16 +86,14 @@ def get_norm_layers(
         norm_layers_["group"].append(layer)
     else:
         for child_layer in layer.children():
-            get_norm_layers(
-                child_layer, norm_layers_, share_layer_norm, share_group_norm
-            )
+            get_norm_layers(child_layer, norm_layers_, share_layer_norm, share_group_norm)
 
 
 def register_norm_forward(
     norm_layer: nn.GroupNorm | nn.LayerNorm,
 ) -> nn.GroupNorm | nn.LayerNorm:
     if not hasattr(norm_layer, "orig_forward"):
-        setattr(norm_layer, "orig_forward", norm_layer.forward)
+        setattr(norm_layer, "orig_forward", norm_layer.forward)  # noqa
     orig_forward = norm_layer.orig_forward
 
     def forward_(hidden_states: T) -> T:
@@ -118,9 +113,7 @@ def register_shared_norm(
 ):
     norm_layers = {"group": [], "layer": []}
     get_norm_layers(model.model, norm_layers, share_layer_norm, share_group_norm)
-    print(
-        f"Patching {len(norm_layers['group'])} group norms, {len(norm_layers['layer'])} layer norms."
-    )
+    print(f"Patching {len(norm_layers['group'])} group norms, {len(norm_layers['layer'])} layer norms.")
     return [register_norm_forward(layer) for layer in norm_layers["group"]] + [
         register_norm_forward(layer) for layer in norm_layers["layer"]
     ]

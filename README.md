@@ -23,6 +23,13 @@ Current `Visionatrix/Text` nodes list:
 
 - **VixMultilineText** - node to just hold text(code compatible).
 - **VixTextConcatenate** - node to concatenate up to 4 different strings with optional delimiter.
+- **VixTextReplace** - find and replace substring in text.
+- **VixDictionaryConvert** - node to create dictionary from text.
+- **VixDictionaryGet** - node to get value by key from dictionary.
+
+Current `Visionatrix/Image` nodes list:
+
+- **VixImageFilters** - applies brightness, saturation, sharpness and other simple Pillow filters to an image.
 
 ### Incorporated nodes
 

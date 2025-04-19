@@ -1,9 +1,52 @@
 [project]
 name = "comfyui-visionatrix"
+version = "1.2.0"
 description = "The ComfyUI-Visionatrix nodes are designed for convenient ComfyUI to [a/Visionatrix](https://github.com/Visionatrix/Visionatrix) workflow support migration, in particular to extract prompt input params (input, textarea, checkbox, select, range, file) to be used in simplified Visionatrix UI."
-version = "1.1.0"
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
 urls.Repository = "https://github.com/Visionatrix/ComfyUI-Visionatrix"
+
+[tool.black]
+line-length = 120
+preview = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+lint.select = [
+  "A",
+  "B",
+  "C",
+  "E",
+  "F",
+  "G",
+  "I",
+  "PIE",
+  "Q",
+  "RET",
+  "RUF",
+  "S",
+  "SIM",
+  "UP",
+  "W",
+]
+lint.extend-ignore = [
+  "I001",
+  "RUF100",
+  "S311",
+  "S603",
+]
+lint.mccabe.max-complexity = 20
+
+[tool.isort]
+profile = "black"
 
 [tool.comfy]
 PublisherId = "visionatrix"
