@@ -456,8 +456,10 @@ NODE_CLASS_MAPPINGS = {
     "VixMultilineText": text.VixMultilineText,
     "VixTextConcatenate": text.VixTextConcatenate,
     "VixTextReplace": text.VixTextReplace,
+    "VixDictionaryNew": text.VixDictionaryNew,
     "VixDictionaryConvert": text.VixDictionaryConvert,
     "VixDictionaryGet": text.VixDictionaryGet,
+    "VixDictionaryUpdate": text.VixDictionaryUpdate,
     "VixImageFilters": image.VixImageFilters,
 }
 
@@ -478,7 +480,9 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "VixMultilineText": "Text Multiline",
     "VixTextConcatenate": "Text Concatenate",
     "VixTextReplace": "Text Replace",
+    "VixDictionaryNew": "Dictionary New",
     "VixDictionaryConvert": "Convert to Dictionary",
     "VixDictionaryGet": "Dictionary Get",
+    "VixDictionaryUpdate": "Dictionary Update",
     "VixImageFilters": "Image Filters",
 }
