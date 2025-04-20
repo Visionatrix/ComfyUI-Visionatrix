@@ -3,9 +3,9 @@ name = "comfyui-visionatrix"
 version = "1.2.1"
 description = "The ComfyUI-Visionatrix nodes are designed for convenient ComfyUI to [a/Visionatrix](https://github.com/Visionatrix/Visionatrix) workflow support migration, in particular to extract prompt input params (input, textarea, checkbox, select, range, file) to be used in simplified Visionatrix UI."
 license = { file = "LICENSE" }
+requires-python = ">=3.10"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
