@@ -43,6 +43,7 @@ class VixTextConcatenate:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/Text"
+    DEPRECATED = True
 
     @classmethod
     def do_it(cls, delimiter: str, clean_whitespace: str, **kwargs):
@@ -73,6 +74,7 @@ class VixTextReplace:
     )
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/Text"
+    DEPRECATED = True
 
     @classmethod
     def do_it(cls, text: str, find: str, replace: str):

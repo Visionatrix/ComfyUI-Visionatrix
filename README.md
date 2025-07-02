@@ -22,8 +22,6 @@ Current `Visionatrix/UI` nodes list:
 Current `Visionatrix/Text` nodes list:
 
 - **VixMultilineText** - node to just hold text(code compatible).
-- **VixTextConcatenate** - node to concatenate up to 4 different strings with optional delimiter.
-- **VixTextReplace** - find and replace substring in text.
 - **VixDictionaryNew** - create a dictionary with up to 9 keys.
 - **VixDictionaryConvert** - node to create dictionary from text.
 - **VixDictionaryGet** - node to get value by key from dictionary.
