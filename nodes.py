@@ -363,6 +363,7 @@ class VixUiWorkflowMetadata:
                 ),
                 "hidden": ("BOOLEAN", {"default": False}),
                 "remote_vae": ("BOOLEAN", {"default": False}),
+                "long_description": ("STRING", {"default": "", "multiline": True}),
             },
         }
 
