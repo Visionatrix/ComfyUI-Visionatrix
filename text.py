@@ -18,6 +18,7 @@ class VixMultilineText:
     RETURN_TYPES = ("STRING",)
     FUNCTION = "do_it"
     CATEGORY = "Visionatrix/Text"
+    DEPRECATED = True
 
     @classmethod
     def do_it(cls, text, **kwargs) -> tuple:
